@@ -1,0 +1,21 @@
+FROM python:3.10-slim-buster
+
+ARG USER=j
+ARG UID=1000
+ARG GID=1000
+
+RUN groupadd -g $GID $USER && \
+    useradd -l -u $UID -g $GID -m $USER
+
+USER $USER
+
+WORKDIR /opt/structurer/
+
+RUN pip install --upgrade pip && \
+    pip install --upgrade setuptools
+
+COPY --chown=$UID:$GID . /opt/structurer/ 
+
+RUN pip install -r setup/requirements.txt
+
+CMD [ "bash" ]

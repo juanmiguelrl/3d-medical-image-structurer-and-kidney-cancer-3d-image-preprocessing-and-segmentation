@@ -1,0 +1,12 @@
+version: '3.5'
+services:
+  structurer:
+    build:
+      context: .
+      dockerfile: setup/Dockerfile.structurer
+    container_name: structurer
+    image: structurer
+    volumes:
+      - ./src:/opt/structurer/src
+      - ./data:/opt/structurer/data
+    tty: true
